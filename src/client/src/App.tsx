@@ -4,6 +4,7 @@ import Admin from "components/pages/admin/Admin"
 import UsersList from "components/pages/admin/user/UsersList"
 import Catalog from "components/pages/catalog/Catalog"
 import SelectedProduct from "components/pages/catalog/SelectedProduct"
+import ErrorPage from "components/pages/errorPage/ErrorPage"
 import Home from "components/pages/home/Home"
 import AuthorizationModal from "components/UI/AuthorizationModal"
 import Footer from "components/UI/Footer"
@@ -66,6 +67,11 @@ const App: React.FC = () => {
             element={<Navigate replace to={links.home.path} />}
           />
         )}
+        <Route path={links.errorPage.path} element={<ErrorPage />} />
+        <Route
+          path={"*"}
+          element={<Navigate replace to={links.errorPage.path} />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

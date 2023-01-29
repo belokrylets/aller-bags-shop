@@ -20,4 +20,7 @@ export const links = {
   menuItem: {
     path: "/admin/:menuItem",
   },
+  errorPage: {
+    path: "/404",
+  },
 }
