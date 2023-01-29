@@ -1,0 +1,37 @@
+.selected__book {
+  .selected__book__breadсrumbs {
+    padding: 10px 0;
+    border-bottom: 1px solid #ced4da;
+    a {
+      color: black;
+    }
+  }
+  .carousel {
+    padding: 10px;
+  }
+  .product__description {
+    padding: 20px;
+    .product__info {
+      margin: 30px 0;
+      p {
+        margin: 5px;
+        font-size: 12px;
+      }
+      .name {
+        font-weight: 600;
+      }
+    }
+    .product__price {
+      font-size: 14px;
+      font-weight: 600;
+      span {
+        font-size: 18px;
+      }
+    }
+    .product__description__text {
+      margin: 30px 0;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+}

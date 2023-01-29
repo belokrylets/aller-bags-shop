@@ -1,0 +1,18 @@
+@import "variables.scss";
+
+.categories {
+  margin-top: 10px;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  .categories__item {
+    cursor: pointer;
+    padding: 10px;
+    &:hover {
+      color: $primary-color;
+    }
+    &.active {
+      background-color: $primary-color;
+      color: #fff;
+    }
+  }
+}

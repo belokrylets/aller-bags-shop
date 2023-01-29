@@ -1,0 +1,36 @@
+@import "variables.scss";
+
+footer {
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  .footer__content {
+    padding: 20px 0;
+    display: flex;
+    flex: 1 1 auto;
+    font-size: 14px;
+
+    .information,
+    .contacts {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      gap: 5px;
+      p {
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+      a {
+        color: #212529;
+      }
+    }
+  }
+  .created__by {
+    background-color: #c4833f;
+    padding: 10px 0;
+    a {
+      color: black;
+    }
+  }
+}

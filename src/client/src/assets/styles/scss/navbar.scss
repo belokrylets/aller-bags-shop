@@ -1,0 +1,27 @@
+@import "variables.scss";
+
+.navbars > nav {
+  height: 80px;
+  border-bottom: 3px solid $primary-color;
+}
+.phone {
+  color: black;
+  text-decoration: none;
+}
+.phone:hover {
+  color: #6c757d;
+}
+
+.nav-link {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.auth__logo {
+  margin-left: 20px;
+  color: #747775;
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
+}

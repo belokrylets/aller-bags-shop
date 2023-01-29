@@ -1,0 +1,96 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url(../../fonts/montserrat/Montserrat-Regular.ttf);
+}
+@import "_variables.scss";
+@import "nullStyles.scss";
+@import "navbar.scss";
+@import "catalog.scss";
+@import "pageHeader.scss";
+@import "categories.scss";
+@import "products.scss";
+@import "selectedBook.scss";
+@import "footer.scss";
+@import "home.scss";
+@import "about.scss";
+@import "admin.scss";
+
+body {
+  margin: 0;
+  font-family: "Montserrat";
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100%;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+input.form-control,
+textarea.form-control,
+select.form-select {
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: none;
+  }
+}
+input.form-check-input {
+  margin: 0;
+  &:focus {
+    box-shadow: none;
+  }
+  &:checked {
+    background-color: $primary-color;
+    border-color: $primary-color;
+  }
+}
+button.accordion-button {
+  font-size: 16px;
+  &:focus {
+    z-index: 3;
+    border-color: $primary-color;
+    outline: 0;
+    box-shadow: none;
+  }
+  &:not(.collapsed) {
+    color: white;
+    background-color: $primary-color;
+  }
+}
+
+.form-check {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+button.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  --bs-btn-active-bg: $primary-color;
+  --bs-btn-active-border-color: $primary-color;
+  &:hover {
+    background-color: #eeab63;
+    border-color: $primary-color;
+  }
+}
+
+.modal__text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.adding__block {
+  font-size: 18px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
