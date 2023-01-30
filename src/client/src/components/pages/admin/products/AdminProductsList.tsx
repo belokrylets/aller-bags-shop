@@ -32,6 +32,7 @@ const AdminProductsList = () => {
   const handleClose = () => {
     setShow(false)
     setMode("")
+    setState(initialState)
   }
   const dispatch = useAppDispatch()
   const products = useAppSelector(productsSelector.selectAll)
