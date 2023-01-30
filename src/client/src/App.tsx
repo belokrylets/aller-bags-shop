@@ -42,7 +42,6 @@ const App: React.FC = () => {
   }, [])
 
   const { isAdmin } = useAppSelector((state) => state.user)
-  console.log("isAdmin", isAdmin)
 
   return (
     <BrowserRouter>

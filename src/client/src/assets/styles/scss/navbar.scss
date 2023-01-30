@@ -7,14 +7,19 @@
 .phone {
   color: black;
   text-decoration: none;
-}
-.phone:hover {
-  color: #6c757d;
+  &:hover {
+    color: $primary-color;
+  }
 }
 
 .nav-link {
-  font-size: 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
   cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
 }
 
 .auth__logo {

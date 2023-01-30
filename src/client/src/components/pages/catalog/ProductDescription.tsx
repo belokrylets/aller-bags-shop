@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap"
 import { colorsSelector } from "store/reducers/colorsSlice/colorsSlice"
 import { gendersSelector } from "store/reducers/gendersSlice/gendersSlice"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
+import { getPriceWithSpace } from "utils/getPriceWithSpace"
 
 interface ProductDescriptionProps {
   selectedProduct: IProducts
@@ -32,7 +33,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
         </Row>
       </div>
       <div className="product__price">
-        Цена: <span>{selectedProduct.price}</span> руб.
+        Цена: <span>{getPriceWithSpace(selectedProduct.price)}</span> руб.
       </div>
       <div className="product__description__text">
         {selectedProduct.description}

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
 import { useAppSelector } from "hooks/redux"
 import { imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
+import { getPriceWithSpace } from "utils/getPriceWithSpace"
 
 interface ProductCardProps {
   product: IProducts
@@ -26,7 +27,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
       </div>
       <div className="product__title">{product.name}</div>
-      <div className="product__price">цена: {product.price} руб.</div>
+      <div className="product__price">
+        цена: {getPriceWithSpace(product.price)} руб.
+      </div>
       <Button onClick={handleCardClick}>Подробнее</Button>
     </div>
   )
