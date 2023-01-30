@@ -51,7 +51,10 @@ input.form-check-input {
   }
 }
 button.accordion-button {
-  font-size: 16px;
+  height: 25px;
+  font-size: 14px;
+  transition-duration: 0.3s;
+
   &:focus {
     z-index: 3;
     border-color: $primary-color;
@@ -71,13 +74,19 @@ button.accordion-button {
 }
 
 button.btn-primary {
+  box-shadow: 0 3px 10px rgb(14 19 28 / 40%);
   background-color: $primary-color;
   border-color: $primary-color;
   --bs-btn-active-bg: $primary-color;
   --bs-btn-active-border-color: $primary-color;
+  transition-duration: 0.5s;
   &:hover {
     background-color: #eeab63;
     border-color: $primary-color;
+  }
+  &:active {
+    background-color: $primary-color !important;
+    border-color: $primary-color !important;
   }
 }
 

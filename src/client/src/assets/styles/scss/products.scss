@@ -52,18 +52,17 @@
   justify-content: center;
 }
 .product__card {
-  height: 500px;
-  width: 300px;
+  height: 400px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  cursor: pointer;
   border: 1px solid #eee;
   margin-top: -1px;
   margin-left: -1px;
-  transition-duration: 0.5s;
+  transition-duration: 0.8s;
 
   &:hover {
     background-color: #eee;
@@ -75,11 +74,14 @@
   }
   .product__title {
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bolder;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
   }
   .product__price {
     color: $primary-color;
     font-weight: bolder;
+    margin-bottom: 10px;
   }
 }
