@@ -58,9 +58,9 @@ const AdminColorList = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Цвет</th>
-            <th>Translate</th>
-            <th>Удалить</th>
+            <th className="col-lg-6">Цвет</th>
+            <th className="col-lg-5">Translate</th>
+            <th className="col-lg-1">Удалить</th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +68,10 @@ const AdminColorList = () => {
             <tr key={col.id} onClick={() => handleTableCLick(col)}>
               <td>{col.name}</td>
               <td>{col.translate}</td>
-              <td onClick={(e) => e.stopPropagation()}>
+              <td
+                className="d-flex align-items-center justify-content-center"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <Button onClick={() => handleDelete(col.id)}>Х</Button>
               </td>
             </tr>

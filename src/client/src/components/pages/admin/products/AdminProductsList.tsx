@@ -68,10 +68,10 @@ const AdminProductsList = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Изображение</th>
-            <th>Название</th>
-            <th>Slug</th>
-            <th>Удалить</th>
+            <th className="col-lg-2">Изображение</th>
+            <th className="col-lg-5">Название</th>
+            <th className="col-lg-2">Slug</th>
+            <th className="col-lg-1">Удалить</th>
           </tr>
         </thead>
         <tbody>
@@ -87,10 +87,15 @@ const AdminProductsList = () => {
 
               <td>{product.name}</td>
               <td>{product.slug}</td>
-              <td>
+              <td
+                style={{ height: "115px" }}
+                className="d-flex align-items-center justify-content-center"
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+              >
                 <Button
-                  onClick={(e) => {
-                    e.stopPropagation()
+                  onClick={() => {
                     handleDelete(product.id)
                   }}
                 >

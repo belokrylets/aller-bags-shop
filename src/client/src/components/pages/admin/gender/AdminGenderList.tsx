@@ -61,9 +61,9 @@ const AdminGenderList = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Пол</th>
-            <th>Translate</th>
-            <th>Удалить</th>
+            <th className="col-lg-6">Пол</th>
+            <th className="col-lg-5">Translate</th>
+            <th className="col-lg-1">Удалить</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +71,10 @@ const AdminGenderList = () => {
             <tr key={gen.id} onClick={() => handleTableCLick(gen)}>
               <td>{gen.name}</td>
               <td>{gen.translate}</td>
-              <td onClick={(e) => e.stopPropagation()}>
+              <td
+                className="d-flex align-items-center justify-content-center"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <Button onClick={() => handleDelete(gen.id)}>Х</Button>
               </td>
             </tr>

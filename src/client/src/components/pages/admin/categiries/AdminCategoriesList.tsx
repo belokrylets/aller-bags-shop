@@ -61,9 +61,9 @@ const AdminCategoriesList = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Категория</th>
-            <th>Translate</th>
-            <th>Удалить</th>
+            <th className="col-lg-6">Категория</th>
+            <th className="col-lg-5">Translate</th>
+            <th className="col-lg-1">Удалить</th>
           </tr>
         </thead>
         <tbody>
@@ -71,7 +71,10 @@ const AdminCategoriesList = () => {
             <tr key={category.id} onClick={() => handleTableCLick(category)}>
               <td>{category.name}</td>
               <td>{category.translate}</td>
-              <td onClick={(e) => e.stopPropagation()}>
+              <td
+                className="d-flex align-items-center justify-content-center"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <Button onClick={() => handleDelete(category.id)}>Х</Button>
               </td>
             </tr>

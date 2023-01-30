@@ -50,12 +50,14 @@ const AdminImages = () => {
       />
       <div className="images_list">
         {images.map((image) => (
-          <Image
-            onClick={() => handleDelete(image.id, image.name)}
-            key={image.id}
-            width={200}
-            src={`http://localhost:5000/${image.name}`}
-          />
+          <div className="images_item">
+            <Image
+              onClick={() => handleDelete(image.id, image.name)}
+              key={image.id}
+              height={100}
+              src={`http://localhost:5000/${image.name}`}
+            />
+          </div>
         ))}
       </div>
     </>

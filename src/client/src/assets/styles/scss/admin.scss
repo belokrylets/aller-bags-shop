@@ -1,8 +1,23 @@
+@import "variables.scss";
 .admin {
   .lists {
     padding: 10px;
     .list__table__head {
       height: 40px;
+    }
+  }
+}
+.images_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  .images_item {
+    border: 1px solid $primary-color;
+    padding: 5px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    &:hover {
+      opacity: 0.5;
     }
   }
 }

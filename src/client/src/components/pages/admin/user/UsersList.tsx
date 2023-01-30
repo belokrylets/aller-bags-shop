@@ -49,9 +49,9 @@ const UsersList = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Почта</th>
-            <th>Роль</th>
-            <th>Удалить</th>
+            <th className="col-lg-6">Почта</th>
+            <th className="col-lg-5">Роль</th>
+            <th className="col-lg-1">Удалить</th>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +59,10 @@ const UsersList = () => {
             <tr onClick={() => handleTableCLick(user)}>
               <td>{user.email}</td>
               <td>{user.roles}</td>
-              <td onClick={(e) => e.stopPropagation()}>
+              <td
+                className="d-flex align-items-center justify-content-center"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <Button onClick={() => handleDelete(user.id)}>Х</Button>
               </td>
             </tr>
