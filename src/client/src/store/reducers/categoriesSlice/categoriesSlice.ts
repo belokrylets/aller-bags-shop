@@ -19,6 +19,7 @@ const categoriesSlice = createSlice({
     addCategory: categoriesAdapter.addOne,
     updateCategory: categoriesAdapter.updateOne,
     removeCategory: categoriesAdapter.removeOne,
+    addManyCategory: categoriesAdapter.addMany,
   },
   extraReducers: (builder) => {
     builder.addCase(

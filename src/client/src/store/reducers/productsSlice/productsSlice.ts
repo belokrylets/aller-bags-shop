@@ -20,6 +20,7 @@ const productsSlice = createSlice({
     addProduct: productsAdapter.addOne,
     updateProduct: productsAdapter.updateOne,
     removeProduct: productsAdapter.removeOne,
+    addManyProducts: productsAdapter.addMany,
   },
   extraReducers: (builder) => {
     builder.addCase(

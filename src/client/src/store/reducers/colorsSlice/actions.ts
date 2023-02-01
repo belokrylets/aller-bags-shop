@@ -1,14 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
+import { $host } from "api"
 
 export const fetchAllColors = createAsyncThunk(
   "colors/fetchAllColors",
   async (_, thunkApi) => {
     try {
-      const response = await axios({
-        method: "get",
-        url: "http://localhost:5000/api/color",
-      })
+      const response = await $host.get("api/color")
 
       const colors = response.data
       return colors

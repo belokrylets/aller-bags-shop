@@ -19,6 +19,7 @@ const colorsSlice = createSlice({
     addColor: colorsAdapter.addOne,
     updateColor: colorsAdapter.updateOne,
     removeColor: colorsAdapter.removeOne,
+    addManyColors: colorsAdapter.addMany,
   },
   extraReducers: (builder) => {
     builder.addCase(

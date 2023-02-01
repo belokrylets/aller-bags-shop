@@ -19,6 +19,7 @@ const gendersSlice = createSlice({
     addGender: gendersAdapter.addOne,
     updateGender: gendersAdapter.updateOne,
     removeGender: gendersAdapter.removeOne,
+    addManyGenders: gendersAdapter.addMany,
   },
   extraReducers: (builder) => {
     builder.addCase(
