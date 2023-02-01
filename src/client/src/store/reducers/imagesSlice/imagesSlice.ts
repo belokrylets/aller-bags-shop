@@ -4,7 +4,6 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getImagesNormalized } from "shared/utils/getNormalized"
 import { fetchAllImages } from "./actions"
 import { IImages } from "./images.modal"
 
@@ -23,9 +22,8 @@ const imagesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchAllImages.fulfilled,
-      (state, action: PayloadAction<IImages>) => {
-        const normalizedCategories = getImagesNormalized(action.payload)
-        imagesAdapter.addMany(state, normalizedCategories!)
+      (state, action: PayloadAction<IImages[]>) => {
+        imagesAdapter.addMany(state, action.payload)
       }
     )
   },

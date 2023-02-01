@@ -4,7 +4,6 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getUsersNormalized } from "shared/utils/getNormalized"
 import { fetchAllUsers } from "./actions"
 import { IUser } from "./user.modal"
 const usersAdapter = createEntityAdapter<IUser>()
@@ -38,9 +37,8 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchAllUsers.fulfilled,
-      (state, action: PayloadAction<IUser>) => {
-        const normalizedCategories = getUsersNormalized(action.payload)
-        usersAdapter.addMany(state, normalizedCategories!)
+      (state, action: PayloadAction<IUser[]>) => {
+        usersAdapter.addMany(state, action.payload)
       }
     )
   },

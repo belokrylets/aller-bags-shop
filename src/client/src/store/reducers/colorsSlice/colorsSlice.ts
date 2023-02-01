@@ -4,7 +4,6 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getColorsNormalized } from "shared/utils/getNormalized"
 import { fetchAllColors } from "./actions"
 import { IColors } from "./colors.modal"
 
@@ -24,9 +23,8 @@ const colorsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchAllColors.fulfilled,
-      (state, action: PayloadAction<IColors>) => {
-        const normalizedCategories = getColorsNormalized(action.payload)
-        colorsAdapter.addMany(state, normalizedCategories!)
+      (state, action: PayloadAction<IColors[]>) => {
+        colorsAdapter.addMany(state, action.payload)
       }
     )
   },

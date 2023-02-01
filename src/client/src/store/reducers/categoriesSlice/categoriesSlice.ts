@@ -4,7 +4,6 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getCategoriesNormalized } from "shared/utils/getNormalized"
 import { fetchAllCategories } from "./actions"
 import { ICategories } from "./categories.modal"
 
@@ -24,9 +23,8 @@ const categoriesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchAllCategories.fulfilled,
-      (state, action: PayloadAction<ICategories>) => {
-        const normalizedCategories = getCategoriesNormalized(action.payload)
-        categoriesAdapter.addMany(state, normalizedCategories!)
+      (state, action: PayloadAction<ICategories[]>) => {
+        categoriesAdapter.addMany(state, action.payload)
       }
     )
   },

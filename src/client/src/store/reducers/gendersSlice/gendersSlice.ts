@@ -4,7 +4,6 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getGendersNormalized } from "shared/utils/getNormalized"
 import { fetchAllGenders } from "./actions"
 import { IGenders } from "./genders.modal"
 
@@ -24,9 +23,8 @@ const gendersSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchAllGenders.fulfilled,
-      (state, action: PayloadAction<IGenders>) => {
-        const normalizedCategories = getGendersNormalized(action.payload)
-        gendersAdapter.addMany(state, normalizedCategories!)
+      (state, action: PayloadAction<IGenders[]>) => {
+        gendersAdapter.addMany(state, action.payload)
       }
     )
   },
