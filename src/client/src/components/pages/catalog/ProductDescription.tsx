@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap"
 import { colorsSelector } from "store/reducers/colorsSlice/colorsSlice"
 import { gendersSelector } from "store/reducers/gendersSlice/gendersSlice"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
-import { getPriceWithSpace } from "utils/getPriceWithSpace"
+import { getPriceWithSpace } from "shared/utils/getPriceWithSpace"
 
 interface ProductDescriptionProps {
   selectedProduct: IProducts

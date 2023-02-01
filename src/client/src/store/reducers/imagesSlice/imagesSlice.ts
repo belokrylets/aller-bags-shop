@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getImagesNormalized } from "utils/getNormalized"
+import { getImagesNormalized } from "shared/utils/getNormalized"
 import { fetchAllImages } from "./actions"
 import { IImages } from "./images.modal"
 

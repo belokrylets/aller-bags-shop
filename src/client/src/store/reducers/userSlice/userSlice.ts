@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getUsersNormalized } from "utils/getNormalized"
+import { getUsersNormalized } from "shared/utils/getNormalized"
 import { fetchAllUsers } from "./actions"
 import { IUser } from "./user.modal"
 const usersAdapter = createEntityAdapter<IUser>()

@@ -1,4 +1,4 @@
-import { links } from "helpers/navbarLinks"
+import { links } from "shared/helpers/navbarLinks"
 import React from "react"
 import { Button, Container, Row, Col } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"

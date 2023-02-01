@@ -5,7 +5,7 @@ import { Button, Form, Modal } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { actions as modalActions } from "store/reducers/modalSlice"
 import { actions as userActions } from "store/reducers/userSlice/userSlice"
-import { links } from "helpers/navbarLinks"
+import { links } from "shared/helpers/navbarLinks"
 
 const AuthorizationModal: React.FC = () => {
   const navigate = useNavigate()

@@ -1,4 +1,4 @@
-import { links } from "helpers/navbarLinks"
+import { links } from "shared/helpers/navbarLinks"
 import { useAppSelector } from "hooks/redux"
 import React, { useLayoutEffect, useState } from "react"
 import { Carousel, Col, Container, Row } from "react-bootstrap"

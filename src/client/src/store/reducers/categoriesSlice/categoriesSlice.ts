@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getCategoriesNormalized } from "utils/getNormalized"
+import { getCategoriesNormalized } from "shared/utils/getNormalized"
 import { fetchAllCategories } from "./actions"
 import { ICategories } from "./categories.modal"
 

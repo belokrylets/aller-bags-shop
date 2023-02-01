@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getGendersNormalized } from "utils/getNormalized"
+import { getGendersNormalized } from "shared/utils/getNormalized"
 import { fetchAllGenders } from "./actions"
 import { IGenders } from "./genders.modal"
 

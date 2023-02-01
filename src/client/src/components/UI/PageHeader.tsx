@@ -1,4 +1,4 @@
-import { links } from "helpers/navbarLinks"
+import { links } from "shared/helpers/navbarLinks"
 import React from "react"
 import { Breadcrumb, Container } from "react-bootstrap"
 import { Link, useParams } from "react-router-dom"

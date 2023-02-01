@@ -4,7 +4,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit"
 import { RootState } from "store/store"
-import { getColorsNormalized } from "utils/getNormalized"
+import { getColorsNormalized } from "shared/utils/getNormalized"
 import { fetchAllColors } from "./actions"
 import { IColors } from "./colors.modal"
 

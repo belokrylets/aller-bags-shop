@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
 import { useAppSelector } from "hooks/redux"
 import { imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
-import { getPriceWithSpace } from "utils/getPriceWithSpace"
+import { getPriceWithSpace } from "shared/utils/getPriceWithSpace"
 
 interface ProductCardProps {
   product: IProducts
