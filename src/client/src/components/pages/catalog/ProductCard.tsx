@@ -1,5 +1,4 @@
 import React from "react"
-import c3 from "assets/media/c3.jpg"
 import { Button, Image } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"

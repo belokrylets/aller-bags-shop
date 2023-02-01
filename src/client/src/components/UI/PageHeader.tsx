@@ -1,7 +1,6 @@
 import { links } from "shared/helpers/navbarLinks"
 import React from "react"
-import { Breadcrumb, Container } from "react-bootstrap"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 interface PageHeaderProps {
   title: string

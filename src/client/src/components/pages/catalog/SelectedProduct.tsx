@@ -1,7 +1,7 @@
 import { links } from "shared/helpers/navbarLinks"
 import { useAppSelector } from "hooks/redux"
 import React, { useLayoutEffect, useState } from "react"
-import { Carousel, Col, Container, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import { Link, useParams } from "react-router-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
 import { productsSelector } from "store/reducers/productsSlice/productsSlice"

@@ -7,7 +7,6 @@ import { RootState } from "store/store"
 import { getProductsNormalized } from "shared/utils/getNormalized"
 import { fetchAllProducts } from "./actions"
 import { IProducts } from "./products.modal"
-import { actions as imagesAction } from "../imagesSlice/imagesSlice"
 
 const productsAdapter = createEntityAdapter<IProducts>()
 
