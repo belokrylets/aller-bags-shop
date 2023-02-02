@@ -83,6 +83,7 @@ button.btn-primary {
   &:hover {
     background-color: #eeab63;
     border-color: $primary-color;
+    box-shadow: 0 10px 20px rgb(14 19 28 / 40%);
   }
   &:active {
     background-color: $primary-color !important;
