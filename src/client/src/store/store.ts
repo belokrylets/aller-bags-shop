@@ -6,6 +6,7 @@ import gendersReducer from "./reducers/gendersSlice/gendersSlice"
 import imagesReducer from "./reducers/imagesSlice/imagesSlice"
 import productsReducer from "./reducers/productsSlice/productsSlice"
 import userReducer from "./reducers/userSlice/userSlice"
+import ordersReducer from "./reducers/ordersSlice/ordersSlice"
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     images: imagesReducer,
     products: productsReducer,
     user: userReducer,
+    orders: ordersReducer,
   },
 })
 export type AppDispatch = typeof store.dispatch

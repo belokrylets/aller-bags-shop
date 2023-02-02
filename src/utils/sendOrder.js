@@ -14,8 +14,6 @@ const sendOrder = async (email, phone, comment) => {
     subject: `Заявка на пошив от ${email}`,
     text: `Номер телефона ${phone}; Комментарий к заказу ${comment}`,
   })
-  console.log("result", result)
-
   return result
 }
 

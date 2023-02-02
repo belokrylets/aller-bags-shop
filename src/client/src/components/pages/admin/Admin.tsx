@@ -2,6 +2,7 @@ import PageHeader from "components/UI/PageHeader"
 import { useAppDispatch } from "hooks/redux"
 import React, { useLayoutEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
+import { fetchAllOrders } from "store/reducers/ordersSlice/actions"
 import { fetchAllUsers } from "store/reducers/userSlice/actions"
 import Lists from "./Lists"
 import Menu from "./Menu"
@@ -10,6 +11,7 @@ const Admin = () => {
   const dispatch = useAppDispatch()
   useLayoutEffect(() => {
     dispatch(fetchAllUsers())
+    dispatch(fetchAllOrders())
   }, [])
 
   const [activeMenuItem, setActiveMenuItem] = useState<string>("products")

@@ -57,6 +57,14 @@ const Menu: React.FC<MenuProps> = ({ activeMenuItem, setActiveMenuItem }) => {
       >
         Изображения
       </div>
+      <div
+        onClick={() => setActiveMenuItem("orders")}
+        className={classNames("categories__item", {
+          active: "orders" === activeMenuItem,
+        })}
+      >
+        Заявки на пошив
+      </div>
     </div>
   )
 }
