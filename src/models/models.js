@@ -45,6 +45,13 @@ const Image = sequelize.define("image", {
   thumbnails: { type: DataTypes.JSON, allowNull: false },
 })
 
+const Orders = sequelize.define("orders", {
+  id: { type: DataTypes.UUID, primaryKey: true },
+  email: { type: DataTypes.STRING, allowNull: false },
+  phone: { type: DataTypes.STRING, allowNull: false },
+  comment: { type: DataTypes.STRING, allowNull: false },
+})
+
 Gender.hasOne(Product)
 
 Categories.hasOne(Product)
@@ -53,4 +60,4 @@ Color.hasMany(Product)
 
 Image.hasMany(Product)
 
-export { User, Gender, Color, Product, Categories, Image }
+export { User, Gender, Color, Product, Categories, Image, Orders }
