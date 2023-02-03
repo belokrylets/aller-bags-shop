@@ -10,7 +10,7 @@ interface CarouselImgProps {
 const CarouselImg: React.FC<CarouselImgProps> = ({ imagesId }) => {
   const allImages = useAppSelector(imagesSelector.selectEntities)
   const images: string[] = imagesId.map(
-    (id) => `http://localhost:5000/${allImages[id]?.name}`
+    (id) => `http://188.68.223.243/${allImages[id]?.name}`
   )
   return (
     <div className="carousel">

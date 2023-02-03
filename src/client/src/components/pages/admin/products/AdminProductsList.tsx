@@ -82,7 +82,7 @@ const AdminProductsList = () => {
                 <Image
                   width={100}
                   height={100}
-                  src={`http://localhost:5000/${images[product.imageId]?.name}`}
+                  src={`http://188.68.223.243/${images[product.imageId]?.name}`}
                 />
               </td>
 

@@ -22,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Image
           width={150}
           height={150}
-          src={`http://localhost:5000/${images[product.imageId]?.name}`}
+          src={`http://188.68.223.243/${images[product.imageId]?.name}`}
         />
       </div>
       <div className="product__title">{product.name}</div>

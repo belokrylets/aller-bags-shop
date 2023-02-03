@@ -23,7 +23,7 @@ import { actions } from "store/reducers/userSlice/userSlice"
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
-
+  console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL)
   useLayoutEffect(() => {
     dispatch(fetchAllProducts())
     dispatch(fetchAllCategories())

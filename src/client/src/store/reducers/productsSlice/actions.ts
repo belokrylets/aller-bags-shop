@@ -1,15 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
+import { $host } from "api"
 
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAllProducts",
   async (_, thunkApi) => {
     try {
-      const response = await axios({
-        method: "get",
-        url: "http://localhost:5000/api/product",
-      })
-
+      const response = await $host.get(`api/product`)
       const products = response.data.rows
       return products
     } catch (error) {

@@ -55,7 +55,7 @@ const AdminImages = () => {
               onClick={() => handleDelete(image.id, image.name)}
               key={image.id}
               height={100}
-              src={`http://localhost:5000/${image.name}`}
+              src={`http://188.68.223.243/${image.name}`}
             />
           </div>
         ))}
