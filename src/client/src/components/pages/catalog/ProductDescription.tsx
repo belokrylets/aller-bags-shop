@@ -1,10 +1,12 @@
-import { useAppSelector } from "hooks/redux"
+import { useAppDispatch, useAppSelector } from "hooks/redux"
 import React from "react"
-import { Col, Row } from "react-bootstrap"
+import { Button, Col, Row } from "react-bootstrap"
 import { colorsSelector } from "store/reducers/colorsSlice/colorsSlice"
 import { gendersSelector } from "store/reducers/gendersSlice/gendersSlice"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
 import { getPriceWithSpace } from "shared/utils/getPriceWithSpace"
+import * as basketApi from "api/basketApi"
+import { actions } from "store/reducers/basketSlice/basketSlice"
 
 interface ProductDescriptionProps {
   selectedProduct: IProducts
@@ -12,9 +14,16 @@ interface ProductDescriptionProps {
 const ProductDescription: React.FC<ProductDescriptionProps> = ({
   selectedProduct,
 }) => {
+  const dispatch = useAppDispatch()
+
   const allGender = useAppSelector(gendersSelector.selectEntities)
   const allColors = useAppSelector(colorsSelector.selectEntities)
+  const basketId = useAppSelector((state) => state.basket.baskedId)
 
+  const handleBuyClick = async (basketId: string, productId: string) => {
+    const basketProduct = await basketApi.create({ basketId, productId })
+    dispatch(actions.addBasketProduct(basketProduct))
+  }
   return (
     <div className="product__description">
       <h2>{selectedProduct.name}</h2>
@@ -38,6 +47,9 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
       <div className="product__description__text">
         {selectedProduct.description}
       </div>
+      <Button onClick={() => handleBuyClick(basketId, selectedProduct.id)}>
+        Добавить в корзину
+      </Button>
     </div>
   )
 }

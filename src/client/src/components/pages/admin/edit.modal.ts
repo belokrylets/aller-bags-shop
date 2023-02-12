@@ -26,7 +26,7 @@ export interface ProductState {
   description: string
   colorId: string
   genderId: string
-  imageId: string
+  imagesIds: string[]
   categoryId: string
 }
 export interface ISelectOptions {

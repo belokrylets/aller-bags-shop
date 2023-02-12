@@ -21,7 +21,8 @@ class UserController {
     const token = await UserServices.check(
       req.user.id,
       req.user.email,
-      req.user.roles
+      req.user.roles,
+      req.user.basketId
     )
     return res.json(token)
   }

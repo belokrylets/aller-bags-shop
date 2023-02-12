@@ -21,3 +21,25 @@
     }
   }
 }
+.admin__image {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+.upload__images {
+  padding: 10px;
+  width: 100%;
+  min-height: 100px;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px dashed $primary-color;
+  border-radius: 7px;
+  .upload__images__item {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

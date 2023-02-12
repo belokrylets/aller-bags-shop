@@ -2,34 +2,48 @@ import React from "react"
 import { Button, Image } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
-import { useAppSelector } from "hooks/redux"
-import { imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
+import { useAppDispatch, useAppSelector } from "hooks/redux"
 import { getPriceWithSpace } from "shared/utils/getPriceWithSpace"
+import { url } from "api"
+import { productsImagesSelector } from "store/reducers/productsSlice/productsSlice"
+import * as basketApi from "api/basketApi"
+import { actions } from "store/reducers/basketSlice/basketSlice"
 
 interface ProductCardProps {
   product: IProducts
 }
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const dispatch = useAppDispatch()
+  const basketId = useAppSelector((state) => state.basket.baskedId)
   const navigate = useNavigate()
   const handleCardClick = () => {
     navigate(product.slug)
   }
-  const images = useAppSelector(imagesSelector.selectEntities)
+
+  const handleBuyClick = async (basketId: string, productId: string) => {
+    const basketProduct = await basketApi.create({ basketId, productId })
+    dispatch(actions.addBasketProduct(basketProduct))
+  }
+  const images = useAppSelector(productsImagesSelector.selectEntities)
 
   return (
     <div className="product__card">
-      <div className="product__image">
+      <div onClick={handleCardClick} className="product__image">
         <Image
-          width={150}
-          height={150}
-          src={`http://188.68.223.243/${images[product.imageId]?.name}`}
+          src={`${url}${
+            images[product.imagesIds[0]]!.thumbnails.e_150x150.path
+          }`}
         />
       </div>
-      <div className="product__title">{product.name}</div>
+      <div onClick={handleCardClick} className="product__title">
+        {product.name}
+      </div>
       <div className="product__price">
         цена: {getPriceWithSpace(product.price)} руб.
       </div>
-      <Button onClick={handleCardClick}>Подробнее</Button>
+      <Button onClick={() => handleBuyClick(basketId, product.id)}>
+        Купить
+      </Button>
     </div>
   )
 }

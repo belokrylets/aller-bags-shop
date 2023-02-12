@@ -11,6 +11,14 @@ export const links = {
     title: "О нас",
     path: "/about",
   },
+  profile: {
+    title: "Личный кабинет",
+    path: "/profile",
+  },
+  basket: {
+    title: "Корзина",
+    path: "/profile/basket",
+  },
   selectedProduct: {
     path: "/catalog/:slug",
   },

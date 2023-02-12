@@ -3,9 +3,10 @@ import { useAppDispatch, useAppSelector } from "hooks/redux"
 import React, { useState } from "react"
 import { Image } from "react-bootstrap"
 import * as imagesApi from "api/imagesApi"
-import { IImages } from "store/reducers/imagesSlice/images.modal"
+import { IImages, IThumbnails } from "store/reducers/imagesSlice/images.modal"
 import { actions, imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
 import EditImages from "./EditImage"
+import { url } from "api"
 
 const AdminImages = () => {
   const dispatch = useAppDispatch()
@@ -13,7 +14,7 @@ const AdminImages = () => {
   const initialState: IImages = {
     id: "",
     name: "",
-    thumbnails: {},
+    thumbnails: {} as IThumbnails,
   }
   const images = useAppSelector(imagesSelector.selectAll)
   const [show, setShow] = useState<boolean>(false)
@@ -54,8 +55,8 @@ const AdminImages = () => {
             <Image
               onClick={() => handleDelete(image.id, image.name)}
               key={image.id}
-              height={100}
-              src={`http://188.68.223.243/${image.name}`}
+              className="admin__image"
+              src={`${url}${image.thumbnails.e_150x150.path}`}
             />
           </div>
         ))}

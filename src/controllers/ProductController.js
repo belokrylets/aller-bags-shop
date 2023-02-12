@@ -1,15 +1,14 @@
 import ApiError from "../error/ApiError.js"
-import { fileURLToPath } from "url"
 
 import ProductServices from "../services/ProductServices.js"
-
-const __filename = fileURLToPath(import.meta.url)
 
 class ProductController {
   async create(req, res, next) {
     try {
       const newProduct = req.body
-      const product = await ProductServices.create(newProduct)
+      const { img } = req.files
+      const product = await ProductServices.create(newProduct, img)
+
       return res.json(product)
     } catch (error) {
       next(ApiError.badRequest(error.message))
@@ -27,7 +26,11 @@ class ProductController {
   }
   async update(req, res) {
     const product = req.body
-    const updatedProduct = await ProductServices.update(product)
+    let img
+    if (req.files) {
+      img = req.files.img
+    }
+    const updatedProduct = await ProductServices.update(product, img)
     return res.json(updatedProduct)
   }
   async delete(req, res) {

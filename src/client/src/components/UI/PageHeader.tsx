@@ -16,7 +16,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title }) => {
         {" / "}
         <span className="breadсrumbs__link">{title}</span>
       </div>
-      <h4 className="page__header__title">{title}</h4>
+      <h1 className="page__header__title">{title}</h1>
     </div>
   )
 }

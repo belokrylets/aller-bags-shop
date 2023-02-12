@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { $host } from "api"
-import axios from "axios"
 
 export const fetchAllCategories = createAsyncThunk(
   "categories/fetchAllCategories",

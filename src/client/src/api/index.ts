@@ -1,10 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios"
 
+export let url = "http://localhost:5000/"
+
 const $host = axios.create({
-  baseURL: "http://188.68.223.243/",
+  baseURL: url,
 })
 const $authHost = axios.create({
-  baseURL: "http://188.68.223.243/",
+  baseURL: url,
 })
 
 const authInterceptor = (value: AxiosRequestConfig<any>) => {

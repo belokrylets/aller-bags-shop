@@ -1,12 +1,15 @@
-@import "variables.scss";
+@import "_variables.scss";
 
 .about {
   font-size: 16px;
   line-height: 1.5;
+
   .about__content {
     padding: 20px 0;
   }
-  h5 {
+
+  h2 {
+    font-size: 17px;
     font-weight: 600;
   }
 }

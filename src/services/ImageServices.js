@@ -3,31 +3,53 @@ import { generateUuid } from "../utils/generateUuid.js"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
 import { v4 } from "uuid"
-import { unlink } from "fs"
+import { unlink, mkdirSync, rmdirSync } from "fs"
+
+import createThumbnails from "../utils/createThumbnails.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 class ImageServices {
-  async create(img) {
+  async create(img, productId) {
     try {
       if (Array.isArray(img)) {
         let createdImages = []
         for (const newImage of img) {
           let fileName = `${v4()}.jpg`
-          newImage.mv(path.resolve(__dirname, "..", "static", fileName))
           const id = generateUuid()
-          const thumbnails = {}
-          const image = await Image.create({ id, name: fileName, thumbnails })
+          mkdirSync(path.resolve(__dirname, "..", "static", id))
+          newImage.mv(path.resolve(__dirname, "..", "static", id, fileName))
+
+          const thumbnails = createThumbnails(newImage, id, fileName)
+
+          const image = await Image.create({
+            id,
+            name: fileName,
+            path: `id/${fileName}`,
+            type: "image/jpg",
+            thumbnails,
+            productId,
+          })
           createdImages.push(image)
         }
         return createdImages
       } else {
-        console.log("img", img)
-        let fileName = `${v4()}.jpg`
-        img.mv(path.resolve(__dirname, "..", "static", fileName))
         const id = generateUuid()
-        const thumbnails = {}
-        const image = await Image.create({ id, name: fileName, thumbnails })
+
+        let fileName = `${v4()}.jpg`
+        mkdirSync(path.resolve(__dirname, "..", "static", id))
+        img.mv(path.resolve(__dirname, "..", "static", id, fileName))
+
+        const thumbnails = createThumbnails(img, id, fileName)
+
+        const image = await Image.create({
+          id,
+          name: fileName,
+          path: `id/${fileName}`,
+          type: "image/jpg",
+          thumbnails,
+          productId,
+        })
         return image
       }
     } catch (error) {
@@ -45,7 +67,7 @@ class ImageServices {
 
   async delete(id, fileName) {
     try {
-      unlink(path.resolve(__dirname, "..", "static", fileName), (err) => {
+      rmdirSync(path.resolve(__dirname, "..", "static", id), (err) => {
         if (err) throw err
       })
       await Image.destroy({ where: { id } })

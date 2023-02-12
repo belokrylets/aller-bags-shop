@@ -4,6 +4,7 @@ footer {
   background-color: $primary-color;
   display: flex;
   flex-direction: column;
+
   .footer__content {
     padding: 20px 0;
     display: flex;
@@ -17,20 +18,40 @@ footer {
       flex-direction: column;
       justify-content: start;
       gap: 5px;
+
       p {
         margin-bottom: 5px;
         font-weight: 600;
       }
+
       a {
         color: #212529;
       }
     }
   }
+
   .created__by {
-    background-color: #c4833f;
+    background-color: $primary-color;
     padding: 10px 0;
+    font-weight: 600;
+
     a {
       color: black;
     }
+  }
+}
+
+.footer__phone {
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+@media (max-width: 991px) {
+  .information {
+    margin-bottom: 20px;
   }
 }

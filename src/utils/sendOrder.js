@@ -5,7 +5,7 @@ const sendOrder = async (email, phone, comment) => {
     service: "gmail",
     auth: {
       user: "aller.bag.order@gmail.com",
-      pass: "",
+      pass: "xrpcyvekwxxbwlrk",
     },
   })
   let result = await transporter.sendMail({

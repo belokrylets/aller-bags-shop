@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
             <Col sm={4}>
               <div className="contacts">
                 <p>КОНТАКТЫ:</p>
-                <a className="phone" href="tel:+79213995539">
+                <a className="footer__phone" href="tel:+79213995539">
                   +7 (921) 399 55 39
                 </a>
-                <a href="mailto:s.belokrylets@gmail.com">aller.bag@yandex.ru</a>
+                <a href="mailto:aller.bag@yandex.ru">aller.bag@yandex.ru</a>
               </div>
             </Col>
           </Row>

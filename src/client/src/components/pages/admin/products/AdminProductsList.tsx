@@ -11,6 +11,7 @@ import { imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
 import * as productsApi from "api/productsApi"
 import { ProductState } from "../edit.modal"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
+import { url } from "api"
 
 const AdminProductsList = () => {
   const initialState: ProductState = {
@@ -21,9 +22,9 @@ const AdminProductsList = () => {
     colorId: "",
     genderId: "",
     categoryId: "",
-    imageId: "",
     name: "",
     slug: "",
+    imagesIds: [],
   }
   const [show, setShow] = useState<boolean>(false)
   const [mode, setMode] = useState<string>("")
@@ -80,9 +81,10 @@ const AdminProductsList = () => {
             <tr onClick={() => handleTableCLick(product)} key={product.id}>
               <td key={product.id}>
                 <Image
-                  width={100}
-                  height={100}
-                  src={`http://188.68.223.243/${images[product.imageId]?.name}`}
+                  className="admin__image"
+                  src={`${url}${
+                    images[product.imagesIds[0]]?.thumbnails.e_150x150.path
+                  }`}
                 />
               </td>
 

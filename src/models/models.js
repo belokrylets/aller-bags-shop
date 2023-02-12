@@ -6,6 +6,16 @@ const User = sequelize.define("user", {
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
   roles: { type: DataTypes.STRING, defaultValue: "USER" },
+  basketId: { type: DataTypes.UUID, allowNull: false },
+})
+
+const Basket = sequelize.define("basket", {
+  id: { type: DataTypes.UUID, primaryKey: true },
+  userId: { type: DataTypes.UUID, allowNull: false },
+})
+
+const BasketProduct = sequelize.define("basket_product", {
+  id: { type: DataTypes.UUID, primaryKey: true },
 })
 
 const Product = sequelize.define("product", {
@@ -18,7 +28,6 @@ const Product = sequelize.define("product", {
   genderId: { type: DataTypes.UUID, allowNull: false },
   categoryId: { type: DataTypes.UUID, allowNull: false },
   colorId: { type: DataTypes.UUID, allowNull: false },
-  imageId: { type: DataTypes.UUID, allowNull: false },
 })
 
 const Categories = sequelize.define("categories", {
@@ -42,6 +51,8 @@ const Color = sequelize.define("color", {
 const Image = sequelize.define("image", {
   id: { type: DataTypes.UUID, primaryKey: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  type: { type: DataTypes.STRING, allowNull: false },
+  path: { type: DataTypes.STRING, allowNull: false },
   thumbnails: { type: DataTypes.JSON, allowNull: false },
 })
 
@@ -52,12 +63,32 @@ const Orders = sequelize.define("orders", {
   comment: { type: DataTypes.STRING, allowNull: false },
 })
 
-Gender.hasOne(Product)
+Gender.hasMany(Product)
 
-Categories.hasOne(Product)
+Categories.hasMany(Product)
 
 Color.hasMany(Product)
 
-Image.hasMany(Product)
+User.hasOne(Basket)
+Basket.belongsTo(User)
 
-export { User, Gender, Color, Product, Categories, Image, Orders }
+Basket.hasMany(BasketProduct, { as: "products" })
+BasketProduct.hasMany(Basket)
+
+Product.hasMany(BasketProduct)
+BasketProduct.belongsTo(Product)
+
+Product.hasMany(Image, { as: "imagesIds" })
+Image.belongsTo(Product)
+
+export {
+  User,
+  Gender,
+  Color,
+  Product,
+  Categories,
+  Image,
+  Orders,
+  Basket,
+  BasketProduct,
+}

@@ -2,6 +2,7 @@
   font-family: "Montserrat";
   src: url(../../fonts/montserrat/Montserrat-Regular.ttf);
 }
+
 @import "_variables.scss";
 @import "nullStyles.scss";
 @import "navbar.scss";
@@ -15,6 +16,9 @@
 @import "about.scss";
 @import "admin.scss";
 @import "errorPage.scss";
+@import "empla.scss";
+@import "profile.scss";
+@import "basket.scss";
 
 body {
   margin: 0;
@@ -40,16 +44,20 @@ select.form-select {
     box-shadow: none;
   }
 }
+
 input.form-check-input {
   margin: 0;
+
   &:focus {
     box-shadow: none;
   }
+
   &:checked {
     background-color: $primary-color;
     border-color: $primary-color;
   }
 }
+
 button.accordion-button {
   height: 25px;
   font-size: 14px;
@@ -61,6 +69,7 @@ button.accordion-button {
     outline: 0;
     box-shadow: none;
   }
+
   &:not(.collapsed) {
     color: white;
     background-color: $primary-color;
@@ -74,17 +83,20 @@ button.accordion-button {
 }
 
 button.btn-primary {
-  box-shadow: 0 3px 10px rgb(14 19 28 / 40%);
+  box-shadow: 0 2px 5px rgb(14 19 28 / 40%);
+  border-radius: 0;
   background-color: $primary-color;
   border-color: $primary-color;
   --bs-btn-active-bg: $primary-color;
   --bs-btn-active-border-color: $primary-color;
   transition-duration: 0.5s;
+
   &:hover {
     background-color: #eeab63;
     border-color: $primary-color;
     box-shadow: 0 10px 20px rgb(14 19 28 / 40%);
   }
+
   &:active {
     background-color: $primary-color !important;
     border-color: $primary-color !important;

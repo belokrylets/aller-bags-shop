@@ -8,7 +8,7 @@ interface AboutPageBlockProps {
 const AboutPageBlock: React.FC<AboutPageBlockProps> = ({ title, children }) => {
   return (
     <div>
-      <h5>{title}</h5>
+      <h2>{title}</h2>
       <p>{children}</p>
     </div>
   )

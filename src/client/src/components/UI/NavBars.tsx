@@ -1,14 +1,24 @@
-import React from "react"
-import { Container, Form, FormControl, Nav, Navbar } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Container, Nav, Navbar } from "react-bootstrap"
+import { Link, useNavigate } from "react-router-dom"
 import logo from "assets/media/logo.png"
 import { links } from "shared/helpers/navbarLinks"
 import { Icon } from "@iconify/react"
 import { useAppDispatch, useAppSelector } from "hooks/redux"
 import { actions as modalActions } from "store/reducers/modalSlice"
 import { actions as userActions } from "store/reducers/userSlice/userSlice"
+import classNames from "classnames"
+import { basketSelector } from "store/reducers/basketSlice/basketSlice"
 
 const NavBars: React.FC = () => {
+  const [isShown, setIsShown] = useState(false)
+  const basketProducts = useAppSelector(basketSelector.selectAll)
+  const navigate = useNavigate()
+  useEffect(() => {
+    document.addEventListener("click", () => setIsShown(false))
+    return () => document.removeEventListener("click", () => setIsShown(false))
+  }, [])
+
   const dispatch = useAppDispatch()
   const loginButton = () => {
     if (isAuth) {
@@ -17,17 +27,21 @@ const NavBars: React.FC = () => {
     } else {
       dispatch(modalActions.changeMode("login"))
     }
+    setIsShown(false)
+  }
+  const navigateHandle = (path: string) => {
+    navigate(path)
   }
   const individualButton = () => {
+    setIsShown(false)
     dispatch(modalActions.changeMode("individual"))
   }
-
   const { isAuth, isAdmin } = useAppSelector((state) => state.user)
   return (
-    <header className="navbars">
+    <header className="navbars" onClick={(e) => e.stopPropagation()}>
       <Navbar bg="light" expand="lg">
         <Container fluid="xxl">
-          <Navbar.Brand>
+          <Navbar.Brand onClick={() => setIsShown(!isShown)}>
             <Link to={links.home.path}>
               <img
                 src={logo}
@@ -38,16 +52,62 @@ const NavBars: React.FC = () => {
               />
             </Link>
           </Navbar.Brand>
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
-              <Link className="nav-link" to={links.catalog.path}>
+          <div className="burger__button">
+            <div className="basket__logo__mobile">
+              <div className="basket__counter">{basketProducts.length}</div>
+              <Icon
+                onClick={() => {
+                  setIsShown(false)
+                  navigateHandle(links.profile.path)
+                }}
+                icon="cil:basket"
+                width="28"
+                height="28"
+              />
+            </div>
+            {isShown ? (
+              <Icon
+                icon="ic:baseline-close"
+                color="#d19e66"
+                width="30"
+                height="30"
+                onClick={() => setIsShown(!isShown)}
+              />
+            ) : (
+              <Icon
+                icon="pajamas:hamburger"
+                width="30"
+                color="#d19e66"
+                height="30"
+                onClick={() => setIsShown(!isShown)}
+              />
+            )}
+          </div>
+          <Navbar.Collapse
+            id="navbarScroll"
+            className={classNames({ show: isShown })}
+          >
+            <Nav className="me-auto my-2 my-lg-0" navbarScroll>
+              <div className="login__mobile" onClick={loginButton}>
+                <Icon
+                  icon="material-symbols:account-circle"
+                  width="30"
+                  height="30"
+                />
+                {isAuth ? "Выйти" : "Авторизоваться"}
+              </div>
+              <Link
+                onClick={() => setIsShown(!isShown)}
+                className="nav-link"
+                to={links.catalog.path}
+              >
                 {links.catalog.title}
               </Link>
-              <Link className="nav-link" to={links.about.path}>
+              <Link
+                onClick={() => setIsShown(!isShown)}
+                className="nav-link"
+                to={links.about.path}
+              >
                 {links.about.title}
               </Link>
               <div onClick={individualButton} className="nav-link">
@@ -55,29 +115,49 @@ const NavBars: React.FC = () => {
               </div>
 
               {isAdmin ? (
-                <Link className="nav-link" to={links.admin.path}>
+                <Link
+                  onClick={() => setIsShown(!isShown)}
+                  className="nav-link"
+                  to={links.admin.path}
+                >
                   Админка
                 </Link>
               ) : null}
+              {isAuth && (
+                <Link
+                  onClick={() => setIsShown(!isShown)}
+                  className="nav-link profile__mobile"
+                  to={links.profile.path}
+                >
+                  {links.profile.title}
+                </Link>
+              )}
             </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Поиск по каталогу..."
-                className="me-2"
-                aria-label="Search"
-              />
-            </Form>
             <div className="ms-3">
               <a className="phone" href="tel:+79213995539">
                 +7 (921) 399 55 39
               </a>
             </div>
+            {isAuth && (
+              <div
+                onClick={() => navigateHandle(links.profile.path)}
+                className="profile__logo"
+              >
+                <Icon icon="iconoir:profile-circle" width="30" height="30" />
+              </div>
+            )}
+            <div
+              onClick={() => navigateHandle(links.basket.path)}
+              className="basket__logo"
+            >
+              <div className="basket__counter">{basketProducts.length}</div>
+              <Icon icon="cil:basket" width="28" height="28" />
+            </div>
             <div onClick={loginButton} className="auth__logo">
               {isAuth ? (
-                <Icon icon="mdi:logout" width="35" height="35" />
+                <Icon icon="ph:sign-out-duotone" width="35" height="35" />
               ) : (
-                <Icon icon="mdi:login" width="35" height="35" />
+                <Icon icon="ph:sign-in-duotone" width="35" height="35" />
               )}
             </div>
           </Navbar.Collapse>

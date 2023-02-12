@@ -1,8 +1,9 @@
-import { User } from "../models/models.js"
+import { Basket, User } from "../models/models.js"
 import { generateUuid } from "../utils/generateUuid.js"
 import bcrypt from "bcrypt"
 import { generateJwt } from "../utils/generateJwt.js"
 import ApiError from "../error/ApiError.js"
+import BasketServices from "./BasketServices.js"
 
 class UserServices {
   async registration(email, password, roles, next) {
@@ -20,9 +21,19 @@ class UserServices {
 
     const hashPassword = await bcrypt.hash(password, 5)
     const id = generateUuid()
-    const user = await User.create({ id, email, password: hashPassword, roles })
+    const basketId = generateUuid()
+    const user = await User.create({
+      id,
+      email,
+      password: hashPassword,
+      roles,
+      basketId,
+    })
+    await BasketServices.create(basketId, user.id)
 
-    const token = generateJwt(id, user.email, user.roles)
+    const token = generateJwt(id, user.email, user.roles, user.basketId)
+    console.log("token", token)
+
     return token
   }
   async login(email, password, next) {
@@ -36,14 +47,19 @@ class UserServices {
     if (!comparePassword) {
       return next(ApiError.badRequest(`Неверный пароль`))
     }
-    const token = generateJwt(user.id, user.email, user.roles)
+    const token = generateJwt(user.id, user.email, user.roles, user.basketId)
     return token
   }
-  async check(id, email, roles) {
-    const token = generateJwt(id, email, roles)
+  async check(id, email, roles, basketId) {
+    const token = generateJwt(id, email, roles, basketId)
+
     return token
   }
   async delete(id) {
+    const user = User.findOne({
+      where: { id },
+    })
+    await Basket.destroy({ where: { id: user.basketId } })
     await User.destroy({ where: { id } })
     return id
   }

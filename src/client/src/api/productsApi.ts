@@ -2,19 +2,22 @@ import { $authHost } from "api"
 import axios from "axios"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
 
-export const create = async (body: IProducts) => {
+export const create = async (body: FormData) => {
   try {
-    const response = await $authHost.post("api/product", body)
-
+    const response = await $authHost.post("api/product", body, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
     return response.data
   } catch (error) {
     console.log(error)
   }
 }
 
-export const update = async (body: IProducts) => {
+export const update = async (body: FormData) => {
   try {
-    const response = await $authHost.put("api/product", body)
+    const response = await $authHost.put("api/product", body, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
 
     return response.data
   } catch (error) {

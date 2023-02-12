@@ -20,25 +20,25 @@ import { fetchAllGenders } from "store/reducers/gendersSlice/actions"
 import { fetchAllImages } from "store/reducers/imagesSlice/actions"
 import { fetchAllProducts } from "store/reducers/productsSlice/actions"
 import { actions } from "store/reducers/userSlice/userSlice"
+import Profile from "components/pages/profile/Profile"
+import Basket from "components/pages/basket/Basket"
+import { fetchBasket } from "store/reducers/basketSlice/actions"
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
-  console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL)
-  useLayoutEffect(() => {
-    dispatch(fetchAllProducts())
+  useEffect(() => {
     dispatch(fetchAllCategories())
     dispatch(fetchAllColors())
     dispatch(fetchAllGenders())
-    dispatch(fetchAllImages())
-  }, [])
-
-  useEffect(() => {
     check().then((data: any) => {
+      console.log("data", data)
       const isAdmin = data.roles === "ADMIN" ? true : false
+      dispatch(fetchBasket(data.basketId))
       dispatch(actions.isAdminChange(isAdmin))
       dispatch(actions.isAuthChange(true))
       dispatch(actions.userChange(data.email))
     })
+    dispatch(fetchAllProducts())
   }, [])
 
   const { isAdmin } = useAppSelector((state) => state.user)
@@ -52,6 +52,8 @@ const App: React.FC = () => {
         <Route path={links.home.path} element={<Home />} />
         <Route path={links.catalog.path} element={<Catalog />} />
         <Route path={links.about.path} element={<About />} />
+        <Route path={links.profile.path} element={<Profile />} />
+        <Route path={links.basket.path} element={<Basket />} />
 
         <Route path={links.menuItem.path} element={<UsersList />} />
         <Route

@@ -1,12 +1,56 @@
-@import "variables.scss";
+@import "_variables.scss";
 
-.navbars > nav {
+div.collapse {
+  background-color: #f8f9fa;
+}
+
+.navbars {
   height: 80px;
+}
+
+.burger__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  .basket__logo__mobile {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    color: #747775;
+    cursor: pointer;
+    position: relative;
+    .basket__counter {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $primary-color;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+nav {
   border-bottom: 3px solid $primary-color;
 }
+
 .phone {
   color: black;
   text-decoration: none;
+
   &:hover {
     color: $primary-color;
   }
@@ -17,7 +61,27 @@
   text-transform: uppercase;
   letter-spacing: 0.6px;
   cursor: pointer;
+
   &:hover {
+    color: $primary-color;
+  }
+}
+
+.login__mobile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  svg {
     color: $primary-color;
   }
 }
@@ -26,7 +90,84 @@
   margin-left: 20px;
   color: #747775;
   cursor: pointer;
+
   &:hover {
     color: $primary-color;
+  }
+}
+.basket__logo {
+  margin-left: 20px;
+  color: #747775;
+  cursor: pointer;
+  position: relative;
+  .basket__counter {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.profile__logo {
+  margin-left: 20px;
+  color: #747775;
+  cursor: pointer;
+  position: relative;
+  .basket__counter {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary-color;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+@media (max-width: 991px) {
+  div.collapse {
+    z-index: 999999999;
+  }
+
+  .phone,
+  .profile__logo,
+  .basket__logo,
+  .auth__logo {
+    display: none;
+  }
+}
+
+@media (min-width: 991px) {
+  .login__mobile,
+  .profile__mobile,
+  .burger__button {
+    display: none;
   }
 }

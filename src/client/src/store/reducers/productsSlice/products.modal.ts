@@ -5,7 +5,7 @@ export interface IProducts {
   price: number
   size: string
   categoryId: string
-  imageId: string
+  imagesIds: string[]
   colorId: string
   genderId: string
   slug: string

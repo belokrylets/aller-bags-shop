@@ -1,33 +1,36 @@
-import { Product } from "../models/models.js"
+import { Product, Image } from "../models/models.js"
 import { generateUuid } from "../utils/generateUuid.js"
+import ImageServices from "./ImageServices.js"
 
 class ProductServices {
-  async create({
-    name,
-    description,
-    price,
-    categoryId,
-    colorId,
-    genderId,
-    slug,
-    imageId,
-    size,
-  }) {
+  async create(
+    { name, description, price, categoryId, colorId, genderId, slug, size },
+    img
+  ) {
     try {
       const id = generateUuid()
+
       const product = await Product.create({
         id,
         name,
         description,
-        price,
+        price: Number(price),
         categoryId,
-        imageId,
         colorId,
         genderId,
         size,
         slug,
       })
-      return product
+      const images = await ImageServices.create(img, id)
+      let imagesIds = []
+      if (Array.isArray(images)) {
+        for (const image of images) {
+          imagesIds.push(image.id)
+        }
+      } else {
+        imagesIds.push(images.id)
+      }
+      return { ...product.dataValues, imagesIds: imagesIds }
     } catch (error) {
       return error
     }
@@ -40,10 +43,15 @@ class ProductServices {
       let offset = page * limit - limit
       let products
       if (!categoriesId) {
-        products = await Product.findAndCountAll({ limit, offset })
+        products = await Product.findAndCountAll({
+          limit,
+          offset,
+          include: [{ model: Image, as: "imagesIds" }],
+        })
       } else {
         products = await Product.findAndCountAll({
           where: { categoriesId, limit, offset },
+          include: [{ model: Image, as: "imagesIds" }],
         })
       }
       return products
@@ -55,17 +63,24 @@ class ProductServices {
     try {
       const product = await Product.findOne({
         where: { id },
+        include: [{ model: Image, as: "imagesIds" }],
       })
       return product
     } catch (error) {
       return error
     }
   }
-  async update(product) {
+  async update(product, img) {
     try {
-      await Product.update(product, {
-        where: { id: product.id },
-      })
+      await Product.update(
+        { ...product, price: Number(product.price) },
+        {
+          where: { id: product.id },
+        }
+      )
+      if (img) {
+        await ImageServices.create(img, product.id)
+      }
       return product
     } catch (error) {
       return error

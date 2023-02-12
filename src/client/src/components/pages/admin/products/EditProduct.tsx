@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "hooks/redux"
 import React, { useState, useLayoutEffect } from "react"
-import { Modal, Form, Button } from "react-bootstrap"
+import { Modal, Form, Button, Image } from "react-bootstrap"
 import { categoriesSelector } from "store/reducers/categoriesSlice/categoriesSlice"
 import { colorsSelector } from "store/reducers/colorsSlice/colorsSlice"
 import { gendersSelector } from "store/reducers/gendersSlice/gendersSlice"
@@ -14,6 +14,8 @@ import {
 } from "store/reducers/imagesSlice/imagesSlice"
 import { IImages } from "store/reducers/imagesSlice/images.modal"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
+import { fetchAllImages } from "store/reducers/imagesSlice/actions"
+import { url } from "api"
 
 interface EditProductProps {
   mode: string
@@ -30,8 +32,11 @@ const EditProduct: React.FC<EditProductProps> = ({
   setState,
 }) => {
   const dispatch = useAppDispatch()
-
-  const [images, setImages] = useState<File | null>(null)
+  const allImages = useAppSelector(imagesSelector.selectEntities)
+  const imagesName: string[] = selectedValue.imagesIds.map(
+    (id) => `${url}${allImages[id]?.thumbnails.e_150x150.path}`
+  )
+  const [images, setImages] = useState<File[]>([])
   const genders = useAppSelector(gendersSelector.selectAll)
   const colors = useAppSelector(colorsSelector.selectAll)
   const categories = useAppSelector(categoriesSelector.selectAll)
@@ -41,14 +46,28 @@ const EditProduct: React.FC<EditProductProps> = ({
     setState(newState)
   }
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const image = e.currentTarget.files![0]
-    setImages(image)
+    const currentImages = Object.values(e.currentTarget.files!)
+    setImages(currentImages)
   }
   const handleSubmit = async () => {
     const formData = new FormData()
-    formData.append("img", images!)
+    formData.append("id", selectedValue.id)
+    formData.append("slug", selectedValue.slug)
+    formData.append("description", selectedValue.description)
+    formData.append("name", selectedValue.name)
+    formData.append("size", selectedValue.size)
+    formData.append("price", `${selectedValue.price}`)
+    formData.append("categoryId", selectedValue.categoryId)
+    formData.append("genderId", selectedValue.genderId)
+    formData.append("colorId", selectedValue.colorId)
+    if (images.length) {
+      images.forEach((image) => {
+        formData.append("img", image)
+      })
+    }
     if (mode === "edit") {
-      const updateProduct: IProducts = await productsApi.update(selectedValue)
+      const updateProduct: IProducts = await productsApi.update(formData)
+      dispatch(fetchAllImages())
       dispatch(
         productsActions.updateProduct({
           id: selectedValue.id,
@@ -56,17 +75,20 @@ const EditProduct: React.FC<EditProductProps> = ({
         })
       )
     } else {
-      const newImage: IImages = await imagesApi.create(formData)
-      const newProduct = await productsApi.create({
-        ...selectedValue,
-        imageId: newImage.id,
-      })
-      dispatch(imagesActions.addImage(newImage))
+      const newProduct = await productsApi.create(formData)
+      dispatch(fetchAllImages())
       dispatch(productsActions.addProduct(newProduct))
     }
   }
   return (
-    <Modal show={show} centered onHide={handleClose}>
+    <Modal
+      show={show}
+      centered
+      onHide={() => {
+        handleClose()
+        setImages([])
+      }}
+    >
       <Modal.Header closeButton>
         <Modal.Title>{mode === "add" ? "Добавление" : "Изменение"}</Modal.Title>
       </Modal.Header>
@@ -176,12 +198,22 @@ const EditProduct: React.FC<EditProductProps> = ({
             multiple
           />
         </Form.Group>
+        {mode === "edit" ? (
+          <div className="upload__images">
+            {imagesName.map((image) => (
+              <div className="upload__images__item" key={image}>
+                <Image className="admin__image" src={image} />
+              </div>
+            ))}
+          </div>
+        ) : null}
       </Modal.Body>
       <Modal.Footer>
         <Button
           onClick={() => {
             handleSubmit()
             handleClose()
+            setImages([])
           }}
           variant="primary"
         >

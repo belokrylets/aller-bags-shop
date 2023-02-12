@@ -1,12 +1,13 @@
 import { links } from "shared/helpers/navbarLinks"
 import { useAppSelector } from "hooks/redux"
-import React, { useLayoutEffect, useState } from "react"
+import React, { useEffect, useLayoutEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import { Link, useParams } from "react-router-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
 import { productsSelector } from "store/reducers/productsSlice/productsSlice"
 import CarouselImg from "./CarouselImg"
 import ProductDescription from "./ProductDescription"
+import { imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
 
 const SelectedProduct: React.FC = () => {
   const allProducts = useAppSelector(productsSelector.selectAll)
@@ -29,10 +30,11 @@ const SelectedProduct: React.FC = () => {
     colorId: "",
     genderId: "",
     categoryId: "",
-    imageId: "",
+    imagesIds: [],
     name: "",
     slug: "",
   })
+
   return (
     <main className="selected__book">
       <Container fluid="xxl">
@@ -49,13 +51,7 @@ const SelectedProduct: React.FC = () => {
         </div>
         <Row>
           <Col sm={6}>
-            <CarouselImg
-              imagesId={[
-                selectedProduct.imageId,
-                selectedProduct.imageId,
-                selectedProduct.imageId,
-              ]}
-            />
+            <CarouselImg imagesId={selectedProduct.imagesIds} />
           </Col>
           <Col sm={6}>
             <ProductDescription selectedProduct={selectedProduct} />

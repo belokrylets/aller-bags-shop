@@ -7,6 +7,7 @@ import imagesReducer from "./reducers/imagesSlice/imagesSlice"
 import productsReducer from "./reducers/productsSlice/productsSlice"
 import userReducer from "./reducers/userSlice/userSlice"
 import ordersReducer from "./reducers/ordersSlice/ordersSlice"
+import basketReducer from "./reducers/basketSlice/basketSlice"
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     products: productsReducer,
     user: userReducer,
     orders: ordersReducer,
+    basket: basketReducer,
   },
 })
 export type AppDispatch = typeof store.dispatch

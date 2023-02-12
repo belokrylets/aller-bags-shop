@@ -3,8 +3,6 @@ import ImageServices from "../services/ImageServices.js"
 
 class ImageController {
   async create(req, res) {
-    console.log("req.files", req)
-
     const { img } = req.files
 
     const image = await ImageServices.create(img)

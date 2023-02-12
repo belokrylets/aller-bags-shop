@@ -1,23 +1,29 @@
-import React from "react"
+import React, { useState } from "react"
 import { Carousel, Image } from "react-bootstrap"
 import { useAppSelector } from "hooks/redux"
-import { imagesSelector } from "store/reducers/imagesSlice/imagesSlice"
+import { url } from "api"
+import { productsImagesSelector } from "store/reducers/productsSlice/productsSlice"
 
 interface CarouselImgProps {
   imagesId: string[]
 }
 
 const CarouselImg: React.FC<CarouselImgProps> = ({ imagesId }) => {
-  const allImages = useAppSelector(imagesSelector.selectEntities)
+  const [index, setIndex] = useState<number>(0)
+
+  const handleSelect = (selectedIndex: number) => {
+    setIndex(selectedIndex)
+  }
+  const allImages = useAppSelector(productsImagesSelector.selectEntities)
   const images: string[] = imagesId.map(
-    (id) => `http://188.68.223.243/${allImages[id]?.name}`
+    (id) => `${url}${allImages[id]?.thumbnails.h_500.path}`
   )
   return (
     <div className="carousel">
-      <Carousel>
+      <Carousel activeIndex={index} onSelect={handleSelect}>
         {images.map((image) => (
-          <Carousel.Item className="d-flex justify-content-center" key={image}>
-            <Image height={450} src={image} />
+          <Carousel.Item className="carousel__item" key={image}>
+            <Image className="carousel__images" src={image} />
           </Carousel.Item>
         ))}
       </Carousel>
