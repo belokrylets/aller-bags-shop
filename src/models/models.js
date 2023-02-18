@@ -9,6 +9,15 @@ const User = sequelize.define("user", {
   basketId: { type: DataTypes.UUID, allowNull: false },
 })
 
+const UserInfo = sequelize.define("userInfo", {
+  id: { type: DataTypes.UUID, primaryKey: true },
+  name: { type: DataTypes.STRING, allowNull: false },
+  surname: { type: DataTypes.STRING, allowNull: false },
+  patronymic: { type: DataTypes.STRING, allowNull: false },
+  phone: { type: DataTypes.STRING, allowNull: false },
+  userId: { type: DataTypes.STRING, allowNull: false },
+})
+
 const Basket = sequelize.define("basket", {
   id: { type: DataTypes.UUID, primaryKey: true },
   userId: { type: DataTypes.UUID, allowNull: false },
@@ -22,7 +31,7 @@ const Product = sequelize.define("product", {
   id: { type: DataTypes.UUID, primaryKey: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
   slug: { type: DataTypes.STRING, unique: true, allowNull: false },
-  description: { type: DataTypes.STRING, allowNull: false },
+  description: { type: DataTypes.TEXT, allowNull: false },
   size: { type: DataTypes.STRING, allowNull: false },
   price: { type: DataTypes.INTEGER, allowNull: false },
   genderId: { type: DataTypes.UUID, allowNull: false },
@@ -63,6 +72,14 @@ const Orders = sequelize.define("orders", {
   comment: { type: DataTypes.STRING, allowNull: false },
 })
 
+const OrdersSuccess = sequelize.define("ordersSuccess", {
+  id: { type: DataTypes.UUID, primaryKey: true },
+  fullName: { type: DataTypes.STRING, allowNull: false },
+  email: { type: DataTypes.STRING, allowNull: false },
+  phone: { type: DataTypes.STRING, allowNull: false },
+  productsIds: { type: DataTypes.TEXT, allowNull: false },
+})
+
 Gender.hasMany(Product)
 
 Categories.hasMany(Product)
@@ -91,4 +108,6 @@ export {
   Orders,
   Basket,
   BasketProduct,
+  UserInfo,
+  OrdersSuccess,
 }

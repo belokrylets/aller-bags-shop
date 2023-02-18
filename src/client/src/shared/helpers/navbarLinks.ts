@@ -31,4 +31,8 @@ export const links = {
   errorPage: {
     path: "/404",
   },
+  selectedOrder: {
+    path: "/admin/:id",
+    title: "Заказ",
+  },
 }

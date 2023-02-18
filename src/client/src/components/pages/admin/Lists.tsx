@@ -4,6 +4,7 @@ import AdminColorLists from "./colors/AdminColorList"
 import AdminGenderList from "./gender/AdminGenderList"
 import AdminImages from "./images/AdminImages"
 import AdminOrdersList from "./orders/AdminOrdersList"
+import OrdersSuccessList from "./ordersSuccess/OrdersSuccessList"
 import AdminProductsList from "./products/AdminProductsList"
 import UsersList from "./user/UsersList"
 
@@ -27,8 +28,10 @@ const Lists: React.FC<ListsProps> = ({ menuItem }) => {
       return <UsersList />
     case "orders":
       return <AdminOrdersList />
+    case "ordersSuccess":
+      return <OrdersSuccessList />
     default:
-      return <AdminProductsList />
+      return <OrdersSuccessList />
   }
 }
 

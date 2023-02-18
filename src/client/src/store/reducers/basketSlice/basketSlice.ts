@@ -24,12 +24,14 @@ const basketSlice = createSlice({
     removeBasketProduct: (state, action: PayloadAction<string>) => {
       basketAdapter.removeOne(state.products, action.payload)
     },
+    removeAllProducts: (state) => {
+      basketAdapter.removeAll(state.products)
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
       fetchBasket.fulfilled,
       (state, action: PayloadAction<IBasket>) => {
-        console.log("action.payload", action.payload)
         state.baskedId = action.payload.id
         basketAdapter.addMany(state.products, action.payload.products)
       }

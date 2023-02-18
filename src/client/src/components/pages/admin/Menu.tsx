@@ -10,6 +10,14 @@ const Menu: React.FC<MenuProps> = ({ activeMenuItem, setActiveMenuItem }) => {
   return (
     <div className="categories">
       <div
+        onClick={() => setActiveMenuItem("ordersSuccess")}
+        className={classNames("categories__item", {
+          active: "ordersSuccess" === activeMenuItem,
+        })}
+      >
+        Заказы
+      </div>
+      <div
         onClick={() => setActiveMenuItem("products")}
         className={classNames("categories__item", {
           active: "products" === activeMenuItem,
@@ -49,14 +57,7 @@ const Menu: React.FC<MenuProps> = ({ activeMenuItem, setActiveMenuItem }) => {
       >
         Пользователи
       </div>
-      <div
-        onClick={() => setActiveMenuItem("images")}
-        className={classNames("categories__item", {
-          active: "images" === activeMenuItem,
-        })}
-      >
-        Изображения
-      </div>
+
       <div
         onClick={() => setActiveMenuItem("orders")}
         className={classNames("categories__item", {
@@ -64,6 +65,15 @@ const Menu: React.FC<MenuProps> = ({ activeMenuItem, setActiveMenuItem }) => {
         })}
       >
         Заявки на пошив
+      </div>
+
+      <div
+        onClick={() => setActiveMenuItem("images")}
+        className={classNames("categories__item", {
+          active: "images" === activeMenuItem,
+        })}
+      >
+        Изображения
       </div>
     </div>
   )

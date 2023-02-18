@@ -7,7 +7,8 @@ import { getPriceWithSpace } from "shared/utils/getPriceWithSpace"
 import { url } from "api"
 import { productsImagesSelector } from "store/reducers/productsSlice/productsSlice"
 import * as basketApi from "api/basketApi"
-import { actions } from "store/reducers/basketSlice/basketSlice"
+import { actions, basketSelector } from "store/reducers/basketSlice/basketSlice"
+import { actions as modalActions } from "store/reducers/modalSlice"
 
 interface ProductCardProps {
   product: IProducts
@@ -19,29 +20,46 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleCardClick = () => {
     navigate(product.slug)
   }
+  const allBasket = useAppSelector(basketSelector.selectAll)
 
   const handleBuyClick = async (basketId: string, productId: string) => {
-    const basketProduct = await basketApi.create({ basketId, productId })
-    dispatch(actions.addBasketProduct(basketProduct))
+    if (basketId) {
+      const basketProduct = await basketApi.create({ basketId, productId })
+      dispatch(actions.addBasketProduct(basketProduct))
+    } else {
+      dispatch(
+        actions.addBasketProduct({
+          id: productId,
+          basketId: "",
+          productId: productId,
+        })
+      )
+    }
   }
   const images = useAppSelector(productsImagesSelector.selectEntities)
 
   return (
-    <div className="product__card">
-      <div onClick={handleCardClick} className="product__image">
+    <div className='product__card'>
+      <div onClick={handleCardClick} className='product__image'>
         <Image
           src={`${url}${
             images[product.imagesIds[0]]!.thumbnails.e_150x150.path
           }`}
         />
       </div>
-      <div onClick={handleCardClick} className="product__title">
+      <div onClick={handleCardClick} className='product__title'>
         {product.name}
       </div>
-      <div className="product__price">
+      <div className='product__price'>
         цена: {getPriceWithSpace(product.price)} руб.
       </div>
-      <Button onClick={() => handleBuyClick(basketId, product.id)}>
+      <Button
+        onClick={() => {
+          if (!allBasket.length) {
+            dispatch(modalActions.changeMode("ordering"))
+          }
+          handleBuyClick(basketId, product.id)
+        }}>
         Купить
       </Button>
     </div>

@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "_variables.scss";
 
 .basket {
   .basket__content {
@@ -15,11 +15,22 @@
         height: 40px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: 0 20px;
         h2 {
           font-size: 16px;
           font-weight: 600;
           margin: 0;
+        }
+        span {
+          text-align: center;
+          align-self: center;
+          color: $primary-color;
+          font-size: 8px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+          cursor: pointer;
         }
       }
       .basket__content__products__list {

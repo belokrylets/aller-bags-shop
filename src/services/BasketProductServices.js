@@ -18,6 +18,7 @@ class BasketProductServices {
   }
   async delete(id) {
     try {
+      console.log("id", id)
       await BasketProduct.destroy({ where: { id } })
       return id
     } catch (error) {

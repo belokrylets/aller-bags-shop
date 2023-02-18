@@ -8,8 +8,12 @@ class BasketController {
   }
   async getOne(req, res) {
     const { id } = req.params
-    console.log("req.params")
     const basket = await BasketServices.getOne(id)
+    return res.json(basket)
+  }
+  async clear(req, res) {
+    const { id } = req.params
+    const basket = await BasketServices.clear(id)
     return res.json(basket)
   }
 }

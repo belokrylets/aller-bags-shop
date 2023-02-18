@@ -21,6 +21,20 @@ class BasketServices {
       return error
     }
   }
+  async clear(id) {
+    try {
+      const basket = await Basket.findOne({
+        where: { id },
+        include: [{ model: BasketProduct, as: "products" }],
+      })
+      for (const products of basket.products) {
+        await BasketProductServices.delete(products.id)
+      }
+      return "Корзина очищена"
+    } catch (error) {
+      return error
+    }
+  }
   async update(body) {
     try {
       const updatedBasket = await Basket.update({

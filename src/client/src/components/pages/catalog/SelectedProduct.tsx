@@ -36,18 +36,18 @@ const SelectedProduct: React.FC = () => {
   })
 
   return (
-    <main className="selected__book">
-      <Container fluid="xxl">
-        <div className="selected__book__breadсrumbs">
-          <Link className="breadсrumbs__link" to={links.home.path}>
+    <main className='selected__book'>
+      <Container fluid='xxl'>
+        <div className='selected__book__breadсrumbs'>
+          <Link className='breadсrumbs__link' to={links.home.path}>
             Главная
           </Link>
           {" / "}
-          <Link className="breadсrumbs__link" to={links.catalog.path}>
+          <Link className='breadсrumbs__link' to={links.catalog.path}>
             Каталог
           </Link>
           {" / "}
-          <span className="breadсrumbs__link">Сумка</span>
+          <span className='breadсrumbs__link'>{selectedProduct.name}</span>
         </div>
         <Row>
           <Col sm={6}>

@@ -1,6 +1,13 @@
 import nodemailer from "nodemailer"
 
-const sendOrder = async (email, phone, comment) => {
+const sendOrder = async (
+  email,
+  phone,
+  comment,
+  fullName = "",
+  type = "order"
+) => {
+  const toEmail = "s.belokrylets@gmail.com"
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -8,13 +15,23 @@ const sendOrder = async (email, phone, comment) => {
       pass: "xrpcyvekwxxbwlrk",
     },
   })
-  let result = await transporter.sendMail({
-    from: email,
-    to: "s.belokrylets@gmail.com",
-    subject: `Заявка на пошив от ${email}`,
-    text: `Номер телефона ${phone}; Комментарий к заказу ${comment}`,
-  })
-  return result
+  if (type === "orderSuccess") {
+    let result = await transporter.sendMail({
+      from: email,
+      to: toEmail,
+      subject: `Оформление заказа от ${fullName}`,
+      text: ` ${email}/${phone}/${comment}`,
+    })
+    return result
+  } else {
+    let result = await transporter.sendMail({
+      from: email,
+      to: toEmail,
+      subject: `Заявка на пошив от ${email}`,
+      text: `Номер телефона ${phone}; Комментарий к заказу ${comment}`,
+    })
+    return result
+  }
 }
 
 export default sendOrder

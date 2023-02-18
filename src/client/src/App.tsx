@@ -23,6 +23,11 @@ import { actions } from "store/reducers/userSlice/userSlice"
 import Profile from "components/pages/profile/Profile"
 import Basket from "components/pages/basket/Basket"
 import { fetchBasket } from "store/reducers/basketSlice/actions"
+import OrderingModal from "components/UI/OrderingModal"
+import OrderSuccessModal from "components/UI/OrderSuccessModal"
+import { fetchUserInfo } from "store/reducers/userSlice/actions"
+import OrderingProductModal from "components/UI/OrderingProductModal"
+import SelectedOrder from "components/pages/admin/ordersSuccess/selectedOrder/SelectedOrder"
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -31,9 +36,9 @@ const App: React.FC = () => {
     dispatch(fetchAllColors())
     dispatch(fetchAllGenders())
     check().then((data: any) => {
-      console.log("data", data)
       const isAdmin = data.roles === "ADMIN" ? true : false
       dispatch(fetchBasket(data.basketId))
+      dispatch(fetchUserInfo(data.id))
       dispatch(actions.isAdminChange(isAdmin))
       dispatch(actions.isAuthChange(true))
       dispatch(actions.userChange(data.email))
@@ -48,12 +53,17 @@ const App: React.FC = () => {
       <NavBars />
       <AuthorizationModal />
       <IndividualModal />
+      <OrderingModal />
+      <OrderSuccessModal />
+      <OrderingProductModal />
       <Routes>
         <Route path={links.home.path} element={<Home />} />
         <Route path={links.catalog.path} element={<Catalog />} />
         <Route path={links.about.path} element={<About />} />
         <Route path={links.profile.path} element={<Profile />} />
         <Route path={links.basket.path} element={<Basket />} />
+
+        <Route path={links.selectedOrder.path} element={<SelectedOrder />} />
 
         <Route path={links.menuItem.path} element={<UsersList />} />
         <Route

@@ -45,43 +45,46 @@ const IndividualModal: React.FC = () => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
             <Form.Label>Электронная почта</Form.Label>
             <Form.Control
-              type="email"
-              name="email"
-              placeholder="name@mail.ru"
+              type='email'
+              name='email'
+              placeholder='name@mail.ru'
               onChange={handleForm}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
             <Form.Label>Номер телефона</Form.Label>
             <Form.Control
               onChange={handleForm}
-              type="phone"
-              name="phone"
-              placeholder="8931..."
+              type='phone'
+              name='phone'
+              placeholder='8931...'
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
             <Form.Label>Комментарий к заявке</Form.Label>
             <Form.Control
               onChange={handleForm}
-              name="comment"
-              as="textarea"
+              name='comment'
+              as='textarea'
               rows={3}
             />
           </Form.Group>
-          <div className="modal__text">
+          <div className='modal__text'>
             <span>Оставить заявку по телефону:</span>{" "}
-            <a className="phone" href="tel:+79213995539">
+            <a className='phone' href='tel:+79213995539'>
               +7 (921) 399 55 39
             </a>
           </div>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button
+          disabled={!form.email || !form.comment || !form.phone}
+          variant='primary'
+          onClick={handleSubmit}>
           Отправить
         </Button>
       </Modal.Footer>

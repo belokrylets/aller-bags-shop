@@ -3,7 +3,7 @@ import { generateUuid } from "../utils/generateUuid.js"
 import path, { dirname } from "path"
 import { fileURLToPath } from "url"
 import { v4 } from "uuid"
-import { unlink, mkdirSync, rmdirSync } from "fs"
+import { unlinkSync, mkdirSync, rmdir, readdir, readdirSync } from "fs"
 
 import createThumbnails from "../utils/createThumbnails.js"
 
@@ -67,9 +67,17 @@ class ImageServices {
 
   async delete(id, fileName) {
     try {
-      rmdirSync(path.resolve(__dirname, "..", "static", id), (err) => {
+      const files = readdirSync(path.resolve(__dirname, "..", "static", id))
+
+      for (const file of files) {
+        unlinkSync(path.resolve(__dirname, "..", "static", id, file), (err) => {
+          if (err) throw err
+        })
+      }
+      rmdir(path.resolve(__dirname, "..", "static", id), (err) => {
         if (err) throw err
       })
+      console.log("del")
       await Image.destroy({ where: { id } })
       return id
     } catch (error) {

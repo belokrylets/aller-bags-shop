@@ -1,9 +1,8 @@
 .home {
-display: flex;
-flex-direction: column;
-gap: 40px;
-margin-bottom: 30px;
-  .home__banner{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  .home__banner {
     height: 70vh;
     display: flex;
     align-items: center;
@@ -25,33 +24,31 @@ margin-bottom: 30px;
     }
   }
 
-  .home__content{
+  .home__content {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    .home__content__header{
+    .home__content__header {
       text-transform: uppercase;
       letter-spacing: 1px;
       margin: 0;
-
     }
   }
-
 }
 
 @media (max-width: 991px) {
   .home {
-  .home__banner {
-    color: white;
-    background-size: cover;
-    background-position: top;
-    background-image: url(../../media/mobile.png);
-    div.row {
-      justify-content: start;
+    .home__banner {
+      color: white;
+      background-size: cover;
+      background-position: top;
+      background-image: url(../../media/mobile.png);
+      div.row {
+        justify-content: start;
+      }
     }
   }
-}
 }

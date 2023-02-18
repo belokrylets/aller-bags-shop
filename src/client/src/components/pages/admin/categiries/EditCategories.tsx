@@ -73,6 +73,7 @@ const EditCategories: React.FC<EditProps> = ({
       </Modal.Body>
       <Modal.Footer>
         <Button
+          disabled={!selectedValue.name || !selectedValue.translate}
           onClick={() => {
             submitHandle()
             handleClose()

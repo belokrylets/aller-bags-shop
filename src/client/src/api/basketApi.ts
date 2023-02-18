@@ -17,3 +17,11 @@ export const deleting = async (id: string) => {
     console.log(error)
   }
 }
+export const clearBasket = async (id: string) => {
+  try {
+    const response = await $host.post(`api/basket/${id}`)
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -17,11 +17,15 @@
   }
 
   .carousel {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     padding: 10px;
+    // width: 85%;
   }
 
   div.carousel__item {
-    padding: 0px 0px 70% 0px;
+    padding: 0px 0px 90% 0px;
     overflow: hidden;
     position: relative;
   }

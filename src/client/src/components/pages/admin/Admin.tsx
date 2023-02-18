@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import { fetchAllImages } from "store/reducers/imagesSlice/actions"
 import { fetchAllOrders } from "store/reducers/ordersSlice/actions"
+import { fetchAllOrdersSuccess } from "store/reducers/ordersSuccessSlice/actions"
 import { fetchAllUsers } from "store/reducers/userSlice/actions"
 import Lists from "./Lists"
 import Menu from "./Menu"
@@ -14,9 +15,10 @@ const Admin = () => {
     dispatch(fetchAllUsers())
     dispatch(fetchAllOrders())
     dispatch(fetchAllImages())
+    dispatch(fetchAllOrdersSuccess())
   }, [])
 
-  const [activeMenuItem, setActiveMenuItem] = useState<string>("products")
+  const [activeMenuItem, setActiveMenuItem] = useState<string>("ordersSuccess")
   return (
     <main className="admin">
       <Container fluid="xxl">

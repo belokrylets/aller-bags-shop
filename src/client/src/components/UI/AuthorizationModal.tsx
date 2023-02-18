@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom"
 import { actions as modalActions } from "store/reducers/modalSlice"
 import { actions as userActions } from "store/reducers/userSlice/userSlice"
 import { links } from "shared/helpers/navbarLinks"
+import { fetchBasket } from "store/reducers/basketSlice/actions"
+import { fetchUserInfo } from "store/reducers/userSlice/actions"
 
 const AuthorizationModal: React.FC = () => {
   const navigate = useNavigate()
@@ -51,6 +53,8 @@ const AuthorizationModal: React.FC = () => {
 
       check().then((data: any) => {
         const isAdmin = data.roles === "ADMIN" ? true : false
+        dispatch(fetchBasket(data.basketId))
+        dispatch(fetchUserInfo(data.id))
         dispatch(userActions.isAdminChange(isAdmin))
         dispatch(userActions.isAuthChange(true))
         dispatch(userActions.userChange(data.email))
@@ -75,33 +79,36 @@ const AuthorizationModal: React.FC = () => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
             <Form.Label>Электронная почта</Form.Label>
             <Form.Control
               onChange={handleForm}
               name={"email"}
               value={formState.email}
-              type="email"
-              placeholder="name@mail.ru"
+              type='email'
+              placeholder='name@mail.ru'
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
             <Form.Label>Пароль</Form.Label>
             <Form.Control
               onChange={handleForm}
               name={"password"}
               value={formState.password}
-              type="password"
-              placeholder="Пароль"
+              type='password'
+              placeholder='Пароль'
             />
           </Form.Group>
-          <div onClick={modalTextHandle} className="modal__text">
+          <div onClick={modalTextHandle} className='modal__text'>
             {modalText}
           </div>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={() => handleSubmit(mode)}>
+        <Button
+          disabled={!formState.email || !formState.password}
+          variant='primary'
+          onClick={() => handleSubmit(mode)}>
           {title}
         </Button>
       </Modal.Footer>

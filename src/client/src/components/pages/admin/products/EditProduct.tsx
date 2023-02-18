@@ -124,7 +124,7 @@ const EditProduct: React.FC<EditProductProps> = ({
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Размеры (мм)</Form.Label>
+          <Form.Label>Размеры (см)</Form.Label>
           <Form.Control
             value={selectedValue.size}
             name="size"
@@ -210,6 +210,17 @@ const EditProduct: React.FC<EditProductProps> = ({
       </Modal.Body>
       <Modal.Footer>
         <Button
+          disabled={
+            !selectedValue.name ||
+            !selectedValue.categoryId ||
+            !selectedValue.colorId ||
+            !selectedValue.description ||
+            !selectedValue.genderId ||
+            !selectedValue.price ||
+            !selectedValue.size ||
+            !selectedValue.slug ||
+            (!images.length && mode === "add")
+          }
           onClick={() => {
             handleSubmit()
             handleClose()

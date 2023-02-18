@@ -1,9 +1,10 @@
-import { Basket, User } from "../models/models.js"
+import { Basket, User, UserInfo } from "../models/models.js"
 import { generateUuid } from "../utils/generateUuid.js"
 import bcrypt from "bcrypt"
 import { generateJwt } from "../utils/generateJwt.js"
 import ApiError from "../error/ApiError.js"
 import BasketServices from "./BasketServices.js"
+import UserInfoServices from "./UserInfoServices.js"
 
 class UserServices {
   async registration(email, password, roles, next) {
@@ -30,7 +31,7 @@ class UserServices {
       basketId,
     })
     await BasketServices.create(basketId, user.id)
-
+    await UserInfoServices.create(id)
     const token = generateJwt(id, user.email, user.roles, user.basketId)
     console.log("token", token)
 
@@ -56,9 +57,10 @@ class UserServices {
     return token
   }
   async delete(id) {
-    const user = User.findOne({
+    const user = await User.findOne({
       where: { id },
     })
+    await UserInfoServices.delete(id)
     await Basket.destroy({ where: { id: user.basketId } })
     await User.destroy({ where: { id } })
     return id

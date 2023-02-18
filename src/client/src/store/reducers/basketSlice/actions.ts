@@ -6,7 +6,6 @@ export const fetchBasket = createAsyncThunk(
   async (basketId: string, thunkApi) => {
     try {
       const response = await $host.get(`api/basket/${basketId}`)
-      console.log("response", response)
       const basket = response.data
       return basket
     } catch (error) {
