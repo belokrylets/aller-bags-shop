@@ -3,7 +3,7 @@ import {
   createSlice,
   PayloadAction,
 } from "@reduxjs/toolkit"
-import { IFormPersonalData } from "components/pages/profile/Profile"
+import { IFormPersonalData } from "components/pages/Profile/profile.interfaces"
 import { RootState } from "store/store"
 import { fetchAllUsers, fetchUserInfo } from "./actions"
 import { IUser, IUserInfo } from "./user.modal"

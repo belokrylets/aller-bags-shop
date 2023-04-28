@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react"
 import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react"
 import { flushSync } from "react-dom"
 import { IProducts } from "store/reducers/productsSlice/products.modal"
-import CarouselCard from "components/pages/home/Carousel/CarouselCard"
+import CarouselCard from "components/pages/Home/CarouselCard"
 
 const TWEEN_FACTOR = 3
 
@@ -60,17 +60,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [emblaApi, onScroll])
 
   return (
-    <div className='embla'>
-      <div className='embla__viewport' ref={emblaRef}>
-        <div className='embla__container'>
+    <div className="embla">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
           {slides.map((slide, index) => (
             <div
-              className='embla__slide'
+              className="embla__slide"
               key={index}
               style={{
                 ...(tweenValues.length && { opacity: tweenValues[index] }),
-              }}>
-              <div className='embla__slide__number'>
+              }}
+            >
+              <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>
               <CarouselCard product={slide} />

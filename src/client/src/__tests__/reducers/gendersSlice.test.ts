@@ -5,7 +5,7 @@ import gendersReducer, {
 } from "store/reducers/gendersSlice/gendersSlice"
 
 describe("testing gendersReducer", () => {
-  test("testing adding gender", () => {
+  test("testing adding AdminGenderList", () => {
     const initialState: EntityState<IGenders> = {
       ids: ["uuid1", "uuid2", "uuid3"],
       entities: {
@@ -83,7 +83,7 @@ describe("testing gendersReducer", () => {
       gendersReducer(initialState, actions.addManyGenders(newGenders))
     ).toEqual(receivedState)
   })
-  test("testing editing gender", () => {
+  test("testing editing AdminGenderList", () => {
     const initialState: EntityState<IGenders> = {
       ids: ["uuid1", "uuid2", "uuid3"],
       entities: {
@@ -118,7 +118,7 @@ describe("testing gendersReducer", () => {
       gendersReducer(initialState, actions.updateGender(editedGender))
     ).toEqual(receivedState)
   })
-  test("testing remove gender", () => {
+  test("testing remove AdminGenderList", () => {
     const initialState: EntityState<IGenders> = {
       ids: ["uuid1", "uuid2", "uuid3"],
       entities: {

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { $host } from "api"
 
 export const fetchAllImages = createAsyncThunk(
-  "images/fetchAllImages",
+  "AdminImages/fetchAllImages",
   async (_, thunkApi) => {
     try {
       const response = await $host.get(`api/images`)

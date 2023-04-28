@@ -1,5 +1,4 @@
 import { $authHost } from "api"
-import axios from "axios"
 
 export const create = async (body: FormData) => {
   try {

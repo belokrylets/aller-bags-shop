@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { $authHost } from "api"
 
 export const fetchAllOrders = createAsyncThunk(
-  "orders/fetchAllOrders",
+  "AdminOrdersList/fetchAllOrders",
   async (_, thunkApi) => {
     try {
       const response = await $authHost.get("api/orders")

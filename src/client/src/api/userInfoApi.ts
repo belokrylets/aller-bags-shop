@@ -1,5 +1,5 @@
 import { $host } from "api"
-import { IFormPersonalData } from "components/pages/profile/Profile"
+import { IFormPersonalData } from "components/pages/Profile/profile.interfaces"
 
 export const update = async (body: IFormPersonalData) => {
   try {

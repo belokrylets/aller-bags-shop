@@ -70,7 +70,7 @@ describe("testing productsReducer", () => {
       productsReducer(initialState, actions.addProduct(newProduct))
     ).toEqual(receivedState)
   })
-  test("testing adding many products", () => {
+  test("testing adding many AdminProductsList", () => {
     const initialState: EntityState<IProducts> = {
       ids: ["uuid1"],
       entities: {

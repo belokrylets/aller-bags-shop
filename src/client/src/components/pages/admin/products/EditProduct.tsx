@@ -40,7 +40,7 @@ const EditProduct: React.FC<EditProductProps> = ({
   const genders = useAppSelector(gendersSelector.selectAll)
   const colors = useAppSelector(colorsSelector.selectAll)
   const categories = useAppSelector(categoriesSelector.selectAll)
-  // const images = useAppSelector(imagesSelector.selectAll)
+  // const AdminImages = useAppSelector(imagesSelector.selectAll)
   const handleForm = (e: { target: { name: string; value: string } }) => {
     const newState = { ...selectedValue, [e.target.name]: e.target.value }
     setState(newState)

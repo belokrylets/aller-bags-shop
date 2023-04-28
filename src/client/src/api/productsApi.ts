@@ -1,6 +1,4 @@
 import { $authHost } from "api"
-import axios from "axios"
-import { IProducts } from "store/reducers/productsSlice/products.modal"
 
 export const create = async (body: FormData) => {
   try {

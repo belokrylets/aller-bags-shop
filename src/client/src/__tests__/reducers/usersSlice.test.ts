@@ -3,7 +3,7 @@ import { IUser } from "store/reducers/userSlice/user.modal"
 import usersReducer, { actions } from "store/reducers/userSlice/userSlice"
 
 describe("testing usersReducer", () => {
-  test("testing editing user", () => {
+  test("testing editing UsersList", () => {
     const initialState: EntityState<IUser> & {
       user: string
       isAuth: boolean
@@ -36,7 +36,7 @@ describe("testing usersReducer", () => {
       receivedState
     )
   })
-  test("testing remove user", () => {
+  test("testing remove UsersList", () => {
     const initialState: EntityState<IUser> & {
       user: string
       isAuth: boolean
@@ -120,7 +120,7 @@ describe("testing usersReducer", () => {
       receivedState
     )
   })
-  test("testing user Change", () => {
+  test("testing UsersList Change", () => {
     const initialState: EntityState<IUser> & {
       user: string
       isAuth: boolean
@@ -141,11 +141,11 @@ describe("testing usersReducer", () => {
       },
       isAdmin: false,
       isAuth: false,
-      user: "user@mail.ru",
+      user: "UsersList@mail.ru",
     }
 
     expect(
-      usersReducer(initialState, actions.userChange("user@mail.ru"))
+      usersReducer(initialState, actions.userChange("UsersList@mail.ru"))
     ).toEqual(receivedState)
   })
   test("testing logout", () => {
@@ -160,7 +160,7 @@ describe("testing usersReducer", () => {
       },
       isAdmin: true,
       isAuth: true,
-      user: "user@mail.ru",
+      user: "UsersList@mail.ru",
     }
     const receivedState = {
       ids: ["uuid1"],
